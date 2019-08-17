@@ -6,6 +6,9 @@
     "codexten"
   ],
   "type": "library",
+  "require": {
+    "omnipay/common": "*"
+  },
   "autoload": {
     "psr-4": {
       "codexten\\yii\\omnipay\\": "src"
@@ -15,8 +18,8 @@
     "branch-alias": {
       "dev-master": "2.0.x-dev"
     },
-    "sconfig-plugin": {
-      "hosts": "src/config/hosts.php"
+    "config-plugin": {
+      "omnipay": "config/omnipay.php"
     }
   }
 }
