@@ -8,6 +8,8 @@ return [
         'omnipay' => [
             'class' => Omnipay::class,
             'defaultGateway' => $params['omnipay.defaultGateway'],
+            'currency' => $params['omnipay.currency'],
+            'testMode' => $params['omnipay.testMode'],
         ],
     ],
 ];

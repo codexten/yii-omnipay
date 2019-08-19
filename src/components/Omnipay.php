@@ -2,6 +2,7 @@
 
 namespace codexten\yii\omnipay\components;
 
+use codexten\yii\helpers\ArrayHelper;
 use Omnipay\Common\GatewayInterface;
 use Omnipay\Common\Message\RequestInterface;
 use yii\base\Component;
@@ -10,8 +11,8 @@ use Omnipay\Omnipay as OP;
 class Omnipay extends Component
 {
     public $defaultGateway = '';
+    public $gateways = [];
 
-    public $name;
     public $testMode = null;
     public $currency = null;
     public $parameters = [];
@@ -24,18 +25,23 @@ class Omnipay extends Component
 
     public function prepareGateway()
     {
-        echo '<pre>';
-        var_dump($this->name);
-        echo '</pre>';
-        exit;
-        $this->_gateway = OP::create($this->name);
-        if ($this->testMode) {
-            $this->parameters['testMode'] = $this->testMode;
-        }
-        if ($this->currency) {
-            $this->parameters['currency'] = $this->currency;
-        }
-        $this->_gateway->initialize($this->parameters);
+        $gateway = $this->gateways[$this->defaultGateway];
+
+        $this->_gateway = OP::create($gateway['driverName']);
+        $parameters = [
+            'testMode' => $this->testMode,
+            'currency' => $this->currency,
+        ];
+        $parameters = ArrayHelper::merge($parameters, ArrayHelper::getValue($gateway, 'parameters', []));
+
+//        if ($this->testMode) {
+//            $this->parameters['testMode'] = $this->testMode;
+//        }
+//        if ($this->currency) {
+//            $this->parameters['currency'] = $this->currency;
+//        }
+
+        $this->_gateway->initialize($parameters);
     }
 
     /**

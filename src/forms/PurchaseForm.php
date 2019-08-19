@@ -22,6 +22,14 @@ use yii\base\Model;
  */
 class PurchaseForm extends Model
 {
+    public $amount;
+    public $order_id;
+    public $customer_name;
+    public $customer_phone;
+    public $customer_email;
+    public $return_url;
+    public $notify_url;
+    
     /**
      * @inheritDoc
      */
