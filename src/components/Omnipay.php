@@ -5,6 +5,7 @@ namespace codexten\yii\omnipay\components;
 use Omnipay\Common\GatewayInterface;
 use Omnipay\Common\Message\RequestInterface;
 use yii\base\Component;
+use Omnipay\Omnipay as OP;
 
 class Omnipay extends Component
 {
@@ -23,7 +24,11 @@ class Omnipay extends Component
 
     public function prepareGateway()
     {
-        $this->_gateway = \Omnipay\Omnipay::create($this->name);
+        echo '<pre>';
+        var_dump($this->name);
+        echo '</pre>';
+        exit;
+        $this->_gateway = OP::create($this->name);
         if ($this->testMode) {
             $this->parameters['testMode'] = $this->testMode;
         }
