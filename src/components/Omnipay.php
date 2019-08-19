@@ -34,13 +34,6 @@ class Omnipay extends Component
         ];
         $parameters = ArrayHelper::merge($parameters, ArrayHelper::getValue($gateway, 'parameters', []));
 
-//        if ($this->testMode) {
-//            $this->parameters['testMode'] = $this->testMode;
-//        }
-//        if ($this->currency) {
-//            $this->parameters['currency'] = $this->currency;
-//        }
-
         $this->_gateway->initialize($parameters);
     }
 
@@ -62,15 +55,18 @@ class Omnipay extends Component
         return $this->getGateway()->purchase($data);
     }
 
-    /**
-     * @param string $method
-     * @param array $parameters
-     *
-     * @return mixed
-     */
-    public function __call($method, $parameters)
-    {
-        return call_user_func_array([$this->getGateway(), $method], $parameters);
-    }
+
+// TODO: to remove
+
+//    /**
+//     * @param string $method
+//     * @param array $parameters
+//     *
+//     * @return mixed
+//     */
+//    public function __call($method, $parameters)
+//    {
+//        return call_user_func_array([$this->getGateway(), $method], $parameters);
+//    }
 
 }
