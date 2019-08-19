@@ -14,7 +14,7 @@ class PurchaseForm extends Model
         return [];
     }
 
-    public function getData()
+    public function getPurchaseData()
     {
         return [];
     }

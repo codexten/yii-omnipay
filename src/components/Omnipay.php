@@ -2,6 +2,8 @@
 
 namespace codexten\yii\omnipay\components;
 
+use Omnipay\Common\GatewayInterface;
+use Omnipay\Common\Message\RequestInterface;
 use yii\base\Component;
 
 class Omnipay extends Component
@@ -31,9 +33,22 @@ class Omnipay extends Component
         $this->_gateway->initialize($this->parameters);
     }
 
+    /**
+     * @return GatewayInterface
+     */
     public function getGateway()
     {
         return $this->_gateway;
+    }
+
+    /**
+     * @param $data
+     *
+     * @return RequestInterface
+     */
+    public function purchase($data)
+    {
+        return $this->getGateway()->purchase($data);
     }
 
     /**
