@@ -1,7 +1,7 @@
 <?php
-
+/* @var $params array*/
 return [
     'omnipay.defaultGateway' => '',
-    'omnipay.testMode' => true,
+    'omnipay.testMode' => '',
     'omnipay.currency' => 'INR',
 ];
