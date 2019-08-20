@@ -55,6 +55,16 @@ class Omnipay extends Component
         return $this->getGateway()->purchase($data);
     }
 
+    /**
+     * @param $data
+     *
+     * @return \Omnipay\Common\Message\ResponseInterface
+     */
+    public function completePurchase($data)
+    {
+        return $this->getGateway()->completePurchase($data)->send();
+    }
+
 
 // TODO: to remove
 

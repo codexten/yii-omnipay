@@ -3,17 +3,14 @@
 namespace codexten\yii\omnipay\actions;
 
 use codexten\yii\omnipay\components\Omnipay;
-use yii\base\Action;
 use yii\base\InvalidConfigException;
 use yii\di\Instance;
+use yii\web\Session;
 
 class PurchaseAction extends Action
 {
-    /**
-     * @var Omnipay
-     */
-    public $omnipay = 'omnipay';
     public $purchaseData;
+    public $sessionData;
 
     /**
      * @throws InvalidConfigException
@@ -23,13 +20,19 @@ class PurchaseAction extends Action
         if (!is_callable($this->purchaseData)) {
             throw new InvalidConfigException('Invalid purchase Data');
         }
-        $this->omnipay = Instance::ensure($this->omnipay, Omnipay::class);
         parent::init();
     }
 
     public function run()
     {
         $purchaseData = call_user_func($this->purchaseData);
+        $this->setSession('purchaseData', $purchaseData);
+
+        if (!empty($this->sessionData) && is_callable($this->sessionData)) {
+            $sessionData = call_user_func($this->sessionData);
+
+            $this->setSession('sessionData', $sessionData);
+        }
 
         $response = $this->omnipay->purchase($purchaseData)->send();
         if ($response->isRedirect()) {
