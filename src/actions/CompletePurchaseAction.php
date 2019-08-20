@@ -38,10 +38,10 @@ class CompletePurchaseAction extends Action
         $response = $this->omnipay->completePurchase($purchaseData)->send();
 
         if ($response->getTransactionStatus() == CompletePurchaseResponse::STATUS_COMPLETED) {
-            return call_user_func($this->onCompleted);
+            return call_user_func_array($this->onCompleted, ['action' => $this]);
         }
 
-        return call_user_func($this->onFailed);
+        return call_user_func_array($this->onFailed, ['action' => $this]);
     }
 
     public function getSessionData()
