@@ -2,10 +2,7 @@
 
 namespace codexten\yii\omnipay\actions;
 
-use codexten\yii\omnipay\components\Omnipay;
 use yii\base\InvalidConfigException;
-use yii\di\Instance;
-use yii\web\Session;
 
 class PurchaseAction extends Action
 {
