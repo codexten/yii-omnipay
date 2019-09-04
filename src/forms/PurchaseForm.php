@@ -54,7 +54,7 @@ class PurchaseForm extends Model
     public function getPurchaseData()
     {
         return [
-            'amount' => $this->amount,
+            'amount' => round($this->amount,2),
             'orderId' => $this->order_id,
             'customerName' => $this->customer_name,
             'customerPhone' => $this->customer_phone,
